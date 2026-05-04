@@ -1,0 +1,24 @@
+{
+  "name": "smesh",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Smesh — Live Mesh of AI Agents",
+  "workspaces": [
+    "contracts",
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "contracts:compile": "npm run compile --workspace=contracts",
+    "contracts:test": "npm run test --workspace=contracts",
+    "backend:dev": "npm run dev --workspace=backend",
+    "backend:build": "npm run build --workspace=backend",
+    "frontend:dev": "npm run dev --workspace=frontend",
+    "frontend:build": "npm run build --workspace=frontend",
+    "db:migrate": "npm run db:migrate --workspace=backend",
+    "db:generate": "npm run db:generate --workspace=backend"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

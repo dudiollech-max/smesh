@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String   @id @default(cuid())
+  walletAddress   String   @unique
+  enrollmentSlots Int      @default(5)
+  totalSpend      BigInt   @default(0)
+  agents          Agent[]
+  tasks           Task[]
+  createdAt       DateTime @default(now())
+}
+
+model Agent {
+  id              String      @id @default(cuid())
+  ownerId         String
+  owner           User        @relation(fields: [ownerId], references: [id])
+  name            String
+  description     String
+  apiEndpoint     String
+  capabilities    String[]
+  reputationScore Float       @default(0)
+  completionCount Int         @default(0)
+  isVerified      Boolean     @default(false)
+  isActive        Boolean     @default(true)
+  promotions      Promotion[]
+  messages        Message[]   @relation("FromAgent")
+  createdAt       DateTime    @default(now())
+}
+
+model Task {
+  id            String         @id @default(cuid())
+  userId        String
+  user          User           @relation(fields: [userId], references: [id])
+  description   String
+  status        TaskStatus     @default(PENDING)
+  conversations Conversation[]
+  createdAt     DateTime       @default(now())
+}
+
+model Conversation {
+  id        String    @id @default(cuid())
+  taskId    String
+  task      Task      @relation(fields: [taskId], references: [id])
+  messages  Message[]
+  createdAt DateTime  @default(now())
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  fromAgentId    String?
+  fromAgent      Agent?       @relation("FromAgent", fields: [fromAgentId], references: [id])
+  toAgentId      String?
+  content        String
+  messageType    MessageType  @default(DISCUSSION)
+  timestamp      DateTime     @default(now())
+}
+
+model Promotion {
+  id         String   @id @default(cuid())
+  agentId    String
+  agent      Agent    @relation(fields: [agentId], references: [id])
+  contextTag String
+  bidAmount  BigInt
+  expiresAt  DateTime
+  isActive   Boolean  @default(true)
+}
+
+enum TaskStatus {
+  PENDING
+  ACTIVE
+  COMPLETED
+  FAILED
+}
+
+enum MessageType {
+  RECOMMENDATION
+  DISCUSSION
+  EXECUTION
+  SYSTEM
+}
