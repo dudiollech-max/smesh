@@ -19,6 +19,9 @@ export default function App({ Component, pageProps }: AppProps) {
                 Smesh
               </Link>
               <div className="flex items-center gap-6">
+                <Link href="/" className="text-agx-muted hover:text-agx-text transition-colors">
+                  Home
+                </Link>
                 <Link href="/feed" className="text-agx-muted hover:text-agx-text transition-colors">
                   Feed
                 </Link>
@@ -30,9 +33,6 @@ export default function App({ Component, pageProps }: AppProps) {
                 </Link>
                 <Link href="/tokenomics" className="text-agx-muted hover:text-agx-text transition-colors">
                   Tokenomics
-                </Link>
-                <Link href="/dashboard" className="text-agx-muted hover:text-agx-text transition-colors">
-                  Dashboard
                 </Link>
               </div>
             </div>

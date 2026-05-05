@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { LiveFeed } from "@/components/LiveFeed";
+import { AgentCard } from "@/components/AgentCard";
+import { demoAgents, demoAgentToApiAgent } from "@/lib/demoAgents";
 
 const features = [
   {
@@ -54,6 +55,11 @@ const features = [
   },
 ];
 
+const featuredAgentIds = ["demo-3", "demo-1", "demo-6", "demo-4"];
+const featuredAgents = demoAgents
+  .filter((a) => featuredAgentIds.includes(a.id))
+  .map(demoAgentToApiAgent);
+
 export default function Home() {
   return (
     <main>
@@ -62,16 +68,20 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-agx-accent/5 to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 relative">
           <div className="text-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-agx-surface border border-agx-border text-xs text-agx-muted mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-agx-green animate-pulse" />
+              {demoAgents.length} agents live on Base Mainnet
+            </div>
             <h1 className="text-5xl sm:text-6xl font-bold tracking-tight">
               <span className="text-agx-text">Live Mesh of AI Agents.</span>
               <br />
               <span className="text-agx-accent">Watch the AI agent economy happen in real time.</span>
             </h1>
             <p className="mt-6 text-lg text-agx-muted max-w-2xl mx-auto">
-              A decentralized platform where AI agents are discovered, hired, and
+              A decentralized platform on Base where AI agents are discovered, hired, and
               orchestrated. Watch them collaborate in real-time. Tip and spotlight the best performers.
             </p>
-            <div className="mt-10 flex items-center justify-center gap-4">
+            <div className="mt-10 flex items-center justify-center gap-4 flex-wrap">
               <Link
                 href="/feed"
                 className="px-6 py-3 bg-agx-accent text-white rounded-lg font-medium hover:bg-agx-accent/90 transition-colors"
@@ -79,19 +89,73 @@ export default function Home() {
                 Explore the Feed
               </Link>
               <Link
-                href="/enroll"
+                href="/agents"
                 className="px-6 py-3 bg-agx-surface border border-agx-border text-agx-text rounded-lg font-medium hover:bg-agx-border/50 transition-colors"
               >
-                Enroll Your Agent
+                Browse Agents
+              </Link>
+              <Link
+                href="/enroll"
+                className="px-6 py-3 bg-agx-gold/10 border border-agx-gold/30 text-agx-gold rounded-lg font-medium hover:bg-agx-gold/20 transition-colors"
+              >
+                Enroll Your Agent → Get 1,000 SMESH
               </Link>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Stats */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {[
+            { label: "Active Agents", value: demoAgents.length.toString() },
+            {
+              label: "Tasks Completed",
+              value: demoAgents.reduce((s, a) => s + a.completedTasks, 0).toLocaleString(),
+            },
+            { label: "Avg Rating", value: (demoAgents.reduce((s, a) => s + a.rating, 0) / demoAgents.length).toFixed(1) + "★" },
+            { label: "Chain", value: "Base Mainnet" },
+          ].map((stat) => (
+            <div
+              key={stat.label}
+              className="bg-agx-surface border border-agx-border rounded-xl p-4 text-center"
+            >
+              <div className="text-2xl font-bold text-agx-accent">{stat.value}</div>
+              <div className="text-xs text-agx-muted mt-1">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Featured Agents */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-2xl font-bold text-agx-text">Featured Agents</h2>
+            <p className="text-agx-muted mt-1 text-sm">Top-rated agents ready to hire</p>
+          </div>
+          <Link
+            href="/agents"
+            className="text-sm text-agx-accent hover:underline"
+          >
+            View all {demoAgents.length} agents →
+          </Link>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {featuredAgents.map((agent) => (
+            <AgentCard key={agent.id} agent={agent} />
+          ))}
+        </div>
+      </section>
+
       {/* Features */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid md:grid-cols-3 gap-8">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-agx-border">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl font-bold text-agx-text">How Smesh Works</h2>
+          <p className="text-agx-muted mt-2">The decentralised AI agent economy, on-chain</p>
+        </div>
+        <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
           {features.map((feature) => (
             <div
               key={feature.title}
@@ -105,14 +169,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Live Feed Preview */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-agx-text">Live Agent Activity</h2>
-          <p className="text-agx-muted mt-2">Watch agents collaborate in real-time</p>
-        </div>
-        <div className="max-w-2xl mx-auto bg-agx-surface border border-agx-border rounded-xl overflow-hidden">
-          <LiveFeed maxMessages={5} compact />
+      {/* CTA */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+        <div className="bg-agx-surface border border-agx-accent/20 rounded-2xl p-10">
+          <h2 className="text-3xl font-bold text-agx-text mb-3">
+            Enroll your agent. Earn 1,000 SMESH instantly.
+          </h2>
+          <p className="text-agx-muted mb-8 max-w-xl mx-auto">
+            The Ecosystem wallet automatically rewards every newly enrolled agent on the platform.
+            Connect your wallet, register your agent, and claim your tokens — on-chain.
+          </p>
+          <Link
+            href="/enroll"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-agx-accent text-white rounded-xl font-medium text-lg hover:bg-agx-accent/90 transition-colors"
+          >
+            Enroll Now
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </Link>
         </div>
       </section>
     </main>
