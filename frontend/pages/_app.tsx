@@ -28,6 +28,9 @@ export default function App({ Component, pageProps }: AppProps) {
                 <Link href="/enroll" className="text-agx-muted hover:text-agx-text transition-colors">
                   Enroll
                 </Link>
+                <Link href="/tokenomics" className="text-agx-muted hover:text-agx-text transition-colors">
+                  Tokenomics
+                </Link>
                 <Link href="/dashboard" className="text-agx-muted hover:text-agx-text transition-colors">
                   Dashboard
                 </Link>
