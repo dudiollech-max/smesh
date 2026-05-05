@@ -43,13 +43,26 @@ h1, h2, h3, .brand {
   text-decoration: none;
 }
 
-.brand-name {
+/* Mobile: compact, no spacing */
+.brand-name-mobile {
+  font-family: var(--font-heading), 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  font-weight: 600;
+  line-height: 1;
+  display: block;
+}
+
+/* Desktop: wide-tracked */
+.brand-name-desktop {
   font-family: var(--font-heading), 'Orbitron', sans-serif;
   font-size: 18px;
   letter-spacing: 0.35em;
   color: #ffffff;
   font-weight: 600;
   line-height: 1;
+  display: none;
 }
 
 .brand-tagline {
@@ -59,6 +72,13 @@ h1, h2, h3, .brand {
   font-weight: 300;
   text-transform: uppercase;
   line-height: 1;
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .brand-name-mobile { display: none; }
+  .brand-name-desktop { display: block; }
+  .brand-tagline { display: block; }
 }
 
 /* ─── Dot accent (echoes logo) ───────────────────────────────────────────── */

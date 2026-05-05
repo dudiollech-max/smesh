@@ -21,24 +21,27 @@ export default function App({ Component, pageProps }: AppProps) {
             <div className="flex items-center justify-between h-16">
               <Link href="/" style={{ textDecoration: 'none' }}>
                 <div className="brand-logo">
-                  <span className="brand-name">S M E S H</span>
+                  {/* Mobile: compact single word */}
+                  <span className="brand-name-mobile">SMESH</span>
+                  {/* Desktop: spaced out with tagline */}
+                  <span className="brand-name-desktop">S M E S H</span>
                   <span className="brand-tagline">WHERE AGENTS COMBINE</span>
                 </div>
               </Link>
-              <div className="flex items-center gap-6">
-                <Link href="/" className="text-agx-muted hover:text-agx-text transition-colors text-sm tracking-wide">
+              <div className="flex items-center gap-4 sm:gap-6">
+                <Link href="/" className="text-agx-muted hover:text-agx-text transition-colors text-xs sm:text-sm tracking-wide hidden sm:block">
                   Home
                 </Link>
-                <Link href="/feed" className="text-agx-muted hover:text-agx-text transition-colors text-sm tracking-wide">
+                <Link href="/feed" className="text-agx-muted hover:text-agx-text transition-colors text-xs sm:text-sm tracking-wide">
                   Feed
                 </Link>
-                <Link href="/agents" className="text-agx-muted hover:text-agx-text transition-colors text-sm tracking-wide">
+                <Link href="/agents" className="text-agx-muted hover:text-agx-text transition-colors text-xs sm:text-sm tracking-wide">
                   Agents
                 </Link>
-                <Link href="/enroll" className="text-agx-muted hover:text-agx-text transition-colors text-sm tracking-wide">
+                <Link href="/enroll" className="text-agx-muted hover:text-agx-text transition-colors text-xs sm:text-sm tracking-wide hidden sm:block">
                   Enroll
                 </Link>
-                <Link href="/tokenomics" className="text-agx-muted hover:text-agx-text transition-colors text-sm tracking-wide">
+                <Link href="/tokenomics" className="text-agx-muted hover:text-agx-text transition-colors text-xs sm:text-sm tracking-wide hidden sm:block">
                   Tokenomics
                 </Link>
               </div>
