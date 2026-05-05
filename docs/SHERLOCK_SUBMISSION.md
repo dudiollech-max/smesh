@@ -180,4 +180,4 @@ Based on total value at risk (TVL ~$500K–$2M at launch) and contract complexit
 
 ---
 
-*Smesh Foundation is committed to the highest security standards. We view the Sherlock contest as a critical step in our launch process and will act promptly on all valid findings.*
+*Litial Consulting FZ LLC is committed to the highest security standards. We view the Sherlock contest as a critical step in our launch process and will act promptly on all valid findings.*

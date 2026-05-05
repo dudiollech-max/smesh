@@ -8,14 +8,15 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 /**
  * @title TokenVesting
  * @notice Cliff + linear vesting for SMESH team/advisor allocations.
- *         Owner is the Foundation multisig — only owner can add/revoke schedules.
  *
- *         Typical usage:
- *           - Team:     4-year vest, 1-year cliff
- *           - Advisors: configurable per beneficiary
+ *         - Owner is the Foundation multisig (Ownable).
+ *         - Each beneficiary can have one or more independent vesting schedules.
+ *         - Schedules are revocable by the owner. On revocation:
+ *             • Unvested tokens are returned to the owner immediately.
+ *             • Tokens already vested but not yet released remain claimable by the beneficiary.
  *
- *         Immediate-unlock wallets (Ecosystem, Foundation reserve) are
- *         controlled by governance, not by this contract.
+ *         Standard team parameters: 4-year total, 1-year cliff.
+ *         Ecosystem/Foundation wallets are NOT managed here — they use multisig governance.
  */
 contract TokenVesting is Ownable {
     using SafeERC20 for IERC20;
@@ -24,23 +25,21 @@ contract TokenVesting is Ownable {
 
     struct VestingSchedule {
         address beneficiary;
-        uint256 start;          // Unix timestamp when vesting begins
-        uint256 cliffDuration;  // Seconds until first tokens unlock
-        uint256 duration;       // Total vesting duration in seconds
-        uint256 totalAmount;    // Total tokens to vest
-        uint256 releasedAmount; // Tokens already released
-        bool revoked;           // Whether schedule has been revoked
+        uint256 start;                  // Unix timestamp when vesting begins
+        uint256 cliffDuration;          // Seconds before any tokens vest
+        uint256 duration;               // Total vesting duration in seconds
+        uint256 totalAmount;            // Total tokens committed to this schedule
+        uint256 releasedAmount;         // Tokens already claimed by beneficiary
+        bool    revoked;                // Whether owner has revoked this schedule
+        uint256 vestedAtRevocation;     // Snapshot of vested amount when revoked (0 if not revoked)
     }
 
     // ─── State ───────────────────────────────────────────────────────────────
 
     IERC20 public immutable token;
 
-    /// scheduleId → VestingSchedule
     mapping(bytes32 => VestingSchedule) private _schedules;
-
-    /// beneficiary → list of scheduleIds
-    mapping(address => bytes32[]) private _beneficiarySchedules;
+    mapping(address => bytes32[])        private _beneficiarySchedules;
 
     uint256 private _scheduleCount;
 
@@ -64,30 +63,31 @@ contract TokenVesting is Ownable {
     event VestingRevoked(
         bytes32 indexed scheduleId,
         address indexed beneficiary,
+        uint256 vestedAtRevocation,
         uint256 refundedToOwner
     );
 
     // ─── Constructor ─────────────────────────────────────────────────────────
 
     /**
-     * @param _token   Address of the SMESH ERC-20 token
-     * @param _owner   Foundation multisig address (will own this contract)
+     * @param _token  Address of the SMESH ERC-20 token
+     * @param _owner  Foundation multisig address (takes ownership immediately)
      */
     constructor(address _token, address _owner) Ownable(_owner) {
         require(_token != address(0), "TokenVesting: zero token address");
         token = IERC20(_token);
     }
 
-    // ─── Admin functions ─────────────────────────────────────────────────────
+    // ─── Admin — schedule creation ────────────────────────────────────────────
 
     /**
-     * @notice Create a vesting schedule for a beneficiary.
-     *         The contract must already hold enough tokens before calling this.
-     * @param beneficiary     Address that will receive vested tokens
-     * @param start           Start timestamp (can be in the future)
-     * @param cliffDuration   Cliff in seconds (e.g. 365 days for 1-year cliff)
-     * @param duration        Full vest duration in seconds (e.g. 4 * 365 days)
-     * @param amount          Total tokens to vest (in wei / smallest unit)
+     * @notice Create a configurable vesting schedule.
+     *         The contract must hold at least `amount` tokens when this is called.
+     * @param beneficiary    Recipient of vested tokens
+     * @param start          Timestamp at which vesting begins (use block.timestamp for "now")
+     * @param cliffDuration  Seconds before any token unlocks (e.g. 365 days)
+     * @param duration       Total vest duration in seconds (e.g. 4 * 365 days)
+     * @param amount         Total SMESH to vest for this beneficiary (in wei)
      */
     function createVestingSchedule(
         address beneficiary,
@@ -95,39 +95,14 @@ contract TokenVesting is Ownable {
         uint256 cliffDuration,
         uint256 duration,
         uint256 amount
-    ) external onlyOwner returns (bytes32 scheduleId) {
+    ) external onlyOwner returns (bytes32) {
         return _createVestingSchedule(beneficiary, start, cliffDuration, duration, amount);
     }
 
     /**
-     * @notice Revoke a vesting schedule. Unreleased tokens are returned to owner.
-     *         Tokens already vested-but-unreleased remain claimable by beneficiary.
-     * @param scheduleId  ID of the schedule to revoke
-     */
-    function revoke(bytes32 scheduleId) external onlyOwner {
-        VestingSchedule storage s = _schedules[scheduleId];
-        require(s.beneficiary != address(0), "TokenVesting: schedule not found");
-        require(!s.revoked, "TokenVesting: already revoked");
-
-        uint256 vestedSoFar = _vestedAmount(s, block.timestamp);
-        uint256 unreleasedVested = vestedSoFar - s.releasedAmount;
-        uint256 refundToOwner = s.totalAmount - vestedSoFar;
-
-        s.revoked = true;
-        // Release already-vested-but-unclaimed tokens so beneficiary can still claim them
-        // (they call release() as normal; we just zero out future accrual by marking revoked)
-        // Transfer unvested portion back to owner
-        if (refundToOwner > 0) {
-            token.safeTransfer(owner(), refundToOwner);
-        }
-
-        emit VestingRevoked(scheduleId, s.beneficiary, refundToOwner);
-    }
-
-    /**
-     * @notice Convenience: create the standard 4-year / 1-year-cliff team schedule.
-     * @param beneficiary  Team member wallet
-     * @param amount       Token allocation
+     * @notice Shorthand for the standard team allocation: 4-year vest, 1-year cliff.
+     * @param beneficiary  Team member or advisor wallet
+     * @param amount       Total SMESH allocation for this person (in wei)
      */
     function createTeamVestingSchedule(
         address beneficiary,
@@ -142,18 +117,44 @@ contract TokenVesting is Ownable {
         );
     }
 
-    // ─── Beneficiary functions ────────────────────────────────────────────────
+    // ─── Admin — revocation ───────────────────────────────────────────────────
 
     /**
-     * @notice Release all currently-vested tokens for a schedule.
-     * @param scheduleId  ID of the vesting schedule
+     * @notice Revoke a vesting schedule.
+     *         - Unvested tokens are transferred immediately back to the owner.
+     *         - Already-vested-but-unreleased tokens remain in the contract for the beneficiary.
+     * @param scheduleId  ID returned when the schedule was created
+     */
+    function revoke(bytes32 scheduleId) external onlyOwner {
+        VestingSchedule storage s = _schedules[scheduleId];
+        require(s.beneficiary != address(0), "TokenVesting: schedule not found");
+        require(!s.revoked,                  "TokenVesting: already revoked");
+
+        uint256 vestedNow    = _computeVested(s, block.timestamp);
+        uint256 refundAmount = s.totalAmount - vestedNow;
+
+        s.revoked              = true;
+        s.vestedAtRevocation   = vestedNow;
+
+        if (refundAmount > 0) {
+            token.safeTransfer(owner(), refundAmount);
+        }
+
+        emit VestingRevoked(scheduleId, s.beneficiary, vestedNow, refundAmount);
+    }
+
+    // ─── Beneficiary — claim ──────────────────────────────────────────────────
+
+    /**
+     * @notice Release all currently-releasable tokens for a specific schedule.
+     *         Either the beneficiary or the owner may call this.
      */
     function release(bytes32 scheduleId) external {
         VestingSchedule storage s = _schedules[scheduleId];
-        require(s.beneficiary != address(0), "TokenVesting: schedule not found");
+        require(s.beneficiary != address(0),                          "TokenVesting: schedule not found");
         require(msg.sender == s.beneficiary || msg.sender == owner(), "TokenVesting: not authorized");
 
-        uint256 releasable = _releasableAmount(s);
+        uint256 releasable = _computeReleasable(s);
         require(releasable > 0, "TokenVesting: nothing to release");
 
         s.releasedAmount += releasable;
@@ -163,14 +164,14 @@ contract TokenVesting is Ownable {
     }
 
     /**
-     * @notice Release tokens across all schedules belonging to the caller.
+     * @notice Claim all releasable tokens across every schedule belonging to msg.sender.
      */
     function releaseAll() external {
         bytes32[] memory ids = _beneficiarySchedules[msg.sender];
-        for (uint256 i = 0; i < ids.length; i++) {
+        uint256 len = ids.length;
+        for (uint256 i = 0; i < len; i++) {
             VestingSchedule storage s = _schedules[ids[i]];
-            if (s.revoked) continue;
-            uint256 releasable = _releasableAmount(s);
+            uint256 releasable = _computeReleasable(s);
             if (releasable == 0) continue;
             s.releasedAmount += releasable;
             token.safeTransfer(s.beneficiary, releasable);
@@ -178,7 +179,7 @@ contract TokenVesting is Ownable {
         }
     }
 
-    // ─── View functions ──────────────────────────────────────────────────────
+    // ─── Views ────────────────────────────────────────────────────────────────
 
     function getSchedule(bytes32 scheduleId) external view returns (VestingSchedule memory) {
         return _schedules[scheduleId];
@@ -188,19 +189,23 @@ contract TokenVesting is Ownable {
         return _beneficiarySchedules[beneficiary];
     }
 
+    /// @notice Returns tokens currently available for release for a given schedule.
     function releasableAmount(bytes32 scheduleId) external view returns (uint256) {
-        return _releasableAmount(_schedules[scheduleId]);
+        return _computeReleasable(_schedules[scheduleId]);
     }
 
+    /// @notice Returns total tokens vested so far (including already released) for a schedule.
     function vestedAmount(bytes32 scheduleId) external view returns (uint256) {
-        return _vestedAmount(_schedules[scheduleId], block.timestamp);
+        VestingSchedule storage s = _schedules[scheduleId];
+        return s.revoked ? s.vestedAtRevocation : _computeVested(s, block.timestamp);
     }
 
+    /// @notice Total number of schedules ever created.
     function scheduleCount() external view returns (uint256) {
         return _scheduleCount;
     }
 
-    // ─── Internal helpers ────────────────────────────────────────────────────
+    // ─── Internal ─────────────────────────────────────────────────────────────
 
     function _createVestingSchedule(
         address beneficiary,
@@ -209,26 +214,27 @@ contract TokenVesting is Ownable {
         uint256 duration,
         uint256 amount
     ) internal returns (bytes32 scheduleId) {
-        require(beneficiary != address(0), "TokenVesting: zero beneficiary");
-        require(duration > 0, "TokenVesting: zero duration");
-        require(amount > 0, "TokenVesting: zero amount");
-        require(cliffDuration <= duration, "TokenVesting: cliff > duration");
+        require(beneficiary != address(0),    "TokenVesting: zero beneficiary");
+        require(duration > 0,                 "TokenVesting: zero duration");
+        require(amount > 0,                   "TokenVesting: zero amount");
+        require(cliffDuration <= duration,    "TokenVesting: cliff exceeds duration");
         require(
             token.balanceOf(address(this)) >= amount,
-            "TokenVesting: insufficient token balance"
+            "TokenVesting: insufficient contract balance"
         );
 
         scheduleId = _computeScheduleId(beneficiary, _scheduleCount);
         _scheduleCount++;
 
         _schedules[scheduleId] = VestingSchedule({
-            beneficiary: beneficiary,
-            start: start,
-            cliffDuration: cliffDuration,
-            duration: duration,
-            totalAmount: amount,
-            releasedAmount: 0,
-            revoked: false
+            beneficiary:         beneficiary,
+            start:               start,
+            cliffDuration:       cliffDuration,
+            duration:            duration,
+            totalAmount:         amount,
+            releasedAmount:      0,
+            revoked:             false,
+            vestedAtRevocation:  0
         });
 
         _beneficiarySchedules[beneficiary].push(scheduleId);
@@ -236,67 +242,40 @@ contract TokenVesting is Ownable {
         emit VestingCreated(scheduleId, beneficiary, start, cliffDuration, duration, amount);
     }
 
-    function _releasableAmount(VestingSchedule storage s) internal view returns (uint256) {
-        if (s.revoked) {
-            // Beneficiary can still claim tokens that had already vested at revocation time
-            // We track that via releasedAmount: vested at revocation = totalAmount - refunded
-            // So remaining releasable = (vestedAtRevoke) - releasedAmount
-            // But after revoke() is called, total "available" = totalAmount - refundedToOwner
-            // We can compute: available = totalAmount - (totalAmount - vestedAtRevoke) = vestedAtRevoke
-            // So releasable = vestedAtRevoke - releasedAmount
-            // Since we don't store vestedAtRevoke directly, we use current vested but cap at available
-            return _vestedAmount(s, block.timestamp) - s.releasedAmount;
-        }
-        return _vestedAmount(s, block.timestamp) - s.releasedAmount;
+    /**
+     * @dev Amount available to claim: vested − already released.
+     *      If revoked, vested is capped at the snapshot taken at revocation time.
+     */
+    function _computeReleasable(VestingSchedule storage s) internal view returns (uint256) {
+        uint256 vested = s.revoked
+            ? s.vestedAtRevocation
+            : _computeVested(s, block.timestamp);
+
+        if (vested <= s.releasedAmount) return 0;
+        return vested - s.releasedAmount;
     }
 
     /**
-     * @dev Standard cliff+linear vesting formula.
-     *      Returns 0 before cliff, then linear pro-rata up to full amount at end.
+     * @dev Standard cliff + linear vesting.
+     *      - Before cliff: 0
+     *      - After full duration: totalAmount
+     *      - In between: linear proportion of time elapsed / total duration
      */
-    function _vestedAmount(
+    function _computeVested(
         VestingSchedule storage s,
         uint256 timestamp
     ) internal view returns (uint256) {
         if (timestamp < s.start + s.cliffDuration) {
             return 0;
         }
-        if (timestamp >= s.start + s.duration || s.revoked) {
-            // After revoke: vested = what was vested at the moment of revocation.
-            // We approximate: if revoked, use the balance that was left after refund.
-            // This is: s.totalAmount - refundedAmount. But we don't store refunded.
-            // Safe fallback: compute normally (will be capped by token balance).
-            if (s.revoked) {
-                // Return total minus what was sent back to owner
-                // Since we can't retrieve refunded amount after the fact, we store it
-                // indirectly: the contract only holds what's claimable after revoke.
-                // Use min of linear calc and contract balance.
-                return s.totalAmount - s.releasedAmount <= token.balanceOf(address(this))
-                    ? s.totalAmount  // full linear
-                    : token.balanceOf(address(this)) + s.releasedAmount;
-            }
+        if (timestamp >= s.start + s.duration) {
             return s.totalAmount;
         }
-        // Linear vesting between cliff and end
         uint256 elapsed = timestamp - s.start;
         return (s.totalAmount * elapsed) / s.duration;
     }
 
-    /**
-     * @dev Sum of all tokens committed to active (non-revoked) schedules minus already released.
-     */
-    function _totalUnreleased() internal view returns (uint256 total) {
-        // We can't iterate all schedules efficiently without a counter mapping,
-        // so we track this as a state variable or accept the cost.
-        // For simplicity: caller (createVestingSchedule) passes in amounts and we
-        // rely on contract balance checks. This is an intentional gas trade-off.
-        return 0; // Overridden: balance check in createVestingSchedule handles this
-    }
-
-    function _computeScheduleId(
-        address beneficiary,
-        uint256 index
-    ) internal pure returns (bytes32) {
+    function _computeScheduleId(address beneficiary, uint256 index) internal pure returns (bytes32) {
         return keccak256(abi.encodePacked(beneficiary, index));
     }
 }

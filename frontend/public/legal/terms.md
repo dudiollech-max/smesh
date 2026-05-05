@@ -1,7 +1,7 @@
 # Smesh Platform — Terms of Service & Token Disclaimer
 
 **Effective Date:** May 5, 2026  
-**Entity:** Smesh Foundation (British Virgin Islands)  
+**Entity:** Litial Consulting FZ LLC (United Arab Emirates)  
 **Contact:** legal@smesh.xyz
 
 ---
@@ -10,7 +10,7 @@
 
 By accessing or using the Smesh platform, website, or any associated software (collectively, the "Platform"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not use the Platform.
 
-These Terms constitute a legally binding agreement between you ("User") and Smesh Foundation, a foundation company incorporated under the laws of the British Virgin Islands ("Foundation," "we," "us," or "our").
+These Terms constitute a legally binding agreement between you ("User") and Litial Consulting FZ LLC, a foundation company incorporated under the laws of the United Arab Emirates ("Foundation," "we," "us," or "our").
 
 ---
 
@@ -117,7 +117,7 @@ You agree to:
 
 ## 7. Intellectual Property
 
-All intellectual property rights in the Platform, including but not limited to software, source code, documentation, trademarks, logos, and design, are the exclusive property of **Smesh Foundation (BVI)** or its licensors.
+All intellectual property rights in the Platform, including but not limited to software, source code, documentation, trademarks, logos, and design, are the exclusive property of **Litial Consulting FZ LLC** or its licensors.
 
 Open-source components are licensed under their respective licences. Nothing in these Terms grants you any rights in the Foundation's intellectual property except as expressly set out herein.
 
@@ -162,10 +162,10 @@ The Foundation reserves the right to modify these Terms at any time. Material ch
 ## 11. Dispute Resolution & Governing Law
 
 **11.1 Governing Law**  
-These Terms shall be governed by and construed in accordance with the laws of the **British Virgin Islands**, without regard to its conflict of law principles.
+These Terms shall be governed by and construed in accordance with the laws of the **United Arab Emirates**, without regard to its conflict of law principles.
 
 **11.2 Arbitration**  
-Any dispute, controversy, or claim arising out of or relating to these Terms or the Platform shall be resolved by binding arbitration in accordance with the LCIA Arbitration Rules as amended from time to time. The seat of arbitration shall be the **British Virgin Islands**. The language of the arbitration shall be English. The arbitral award shall be final and binding.
+Any dispute, controversy, or claim arising out of or relating to these Terms or the Platform shall be resolved by binding arbitration in accordance with the LCIA Arbitration Rules as amended from time to time. The seat of arbitration shall be the **United Arab Emirates**. The language of the arbitration shall be English. The arbitral award shall be final and binding.
 
 **11.3 Class Action Waiver**  
 You waive any right to bring claims against the Foundation as a plaintiff or class member in any purported class, collective, or representative proceeding.
@@ -186,6 +186,6 @@ You waive any right to bring claims against the Foundation as a plaintiff or cla
 
 ---
 
-*Smesh Foundation is a foundation company incorporated in the British Virgin Islands. Registration details available upon request. This document is self-drafted and does not constitute legal advice. Users should seek independent legal counsel regarding their specific circumstances.*
+*Litial Consulting FZ LLC is a foundation company incorporated in the United Arab Emirates. Registration details available upon request. This document is self-drafted and does not constitute legal advice. Users should seek independent legal counsel regarding their specific circumstances.*
 
 *Effective: May 5, 2026 | Version 1.0*

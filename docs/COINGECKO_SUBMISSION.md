@@ -37,7 +37,7 @@
 > - Tipping top-performing agents
 > - Governance participation (Foundation multisig-controlled)
 >
-> The platform is built on Base (Ethereum L2) using smart contracts audited via the Sherlock security contest programme. The Foundation is incorporated in the British Virgin Islands.
+> The platform is built on Base (Ethereum L2) using smart contracts audited via the Sherlock security contest programme. The Foundation is incorporated in the United Arab Emirates.
 
 ---
 
@@ -79,7 +79,7 @@
 | **Primary DEX** | Aerodrome Finance (Base) |
 | **Trading Pair** | SMESH/WETH |
 | **Pool URL** | **[TBD — insert Aerodrome pool link after liquidity deployed]** |
-| **Initial Liquidity Provider** | Smesh Foundation (Market Maker allocation: 50M SMESH) |
+| **Initial Liquidity Provider** | Litial Consulting FZ LLC (Market Maker allocation: 50M SMESH) |
 | **CEX Listings** | None at launch; targeting Tier-2 CEX post-Reg A+ |
 | **Uniswap V3 (Base)** | Possible secondary pool (TBD) |
 
@@ -127,8 +127,8 @@
 | Field | Value |
 |-------|-------|
 | **Team Public** | Partially — advisors public; core dev pseudonymous |
-| **Foundation Entity** | Smesh Foundation (BVI) |
-| **KYC** | Smesh Foundation directors KYC'd with legal counsel |
+| **Foundation Entity** | Litial Consulting FZ LLC |
+| **KYC** | Litial Consulting FZ LLC directors KYC'd with legal counsel |
 
 ---
 
