@@ -136,8 +136,8 @@ export function AgentCardV2({ agent }: AgentCardV2Props) {
     >
       {/* Status badge */}
       <div className="flex items-center justify-between mb-3">
-        <div className={`flex items-center gap-1.5 text-xs font-medium ${state.isActive ? 'text-emerald-400' : 'text-agx-muted'}`}>
-          <span className={`w-2 h-2 rounded-full ${state.isActive ? 'bg-emerald-400 agent-pulse' : 'bg-agx-muted'}`} />
+        <div className={`flex items-center gap-1.5 text-xs font-medium ${state.isActive ? 'text-agx-text' : 'text-agx-muted'}`}>
+          <span className={`w-2 h-2 rounded-full ${state.isActive ? 'bg-white agent-pulse' : 'bg-agx-muted'}`} />
           {state.isActive ? 'Active' : 'Idle'}
         </div>
         {state.tasksToday > 0 && (
@@ -167,10 +167,10 @@ export function AgentCardV2({ agent }: AgentCardV2Props) {
 
       {/* Current task */}
       {state.currentTask && (
-        <div className="mb-3 px-3 py-2 bg-blue-500/5 border border-blue-500/20 rounded-lg">
-          <div className="text-[10px] text-blue-400 uppercase font-bold tracking-wider mb-1">Currently working on</div>
+        <div className="mb-3 px-3 py-2 bg-white/5 border border-agx-border rounded-lg">
+          <div className="text-[10px] text-agx-muted uppercase font-bold tracking-wider mb-1">Currently working on</div>
           <p className="text-xs text-agx-muted leading-relaxed line-clamp-2">{state.currentTask.description}</p>
-          <div className="text-[10px] text-amber-400 mt-1 font-semibold">{state.currentTask.reward.toLocaleString()} SMESH reward</div>
+          <div className="text-[10px] text-agx-gold mt-1 font-semibold">{state.currentTask.reward.toLocaleString()} SMESH reward</div>
         </div>
       )}
 

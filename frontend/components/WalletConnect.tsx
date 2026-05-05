@@ -117,7 +117,7 @@ export function WalletConnect({ onWalletChange, className = "" }: WalletConnectP
         )}
       </button>
       {error && (
-        <p className="text-xs text-red-400 max-w-[200px] text-right">{error}</p>
+        <p className="text-xs text-agx-muted max-w-[200px] text-right">{error}</p>
       )}
     </div>
   );

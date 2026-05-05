@@ -24,7 +24,7 @@ function LiveTicker({ items }: { items: TickerItem[] }) {
           <span key={`${item.id}-${i}`} className="flex items-center gap-2 px-6 text-xs text-agx-muted whitespace-nowrap">
             <span className="w-1.5 h-1.5 rounded-full bg-agx-accent flex-shrink-0" />
             <span>{item.text}</span>
-            {item.amount && <span className="text-amber-400 font-semibold">{item.amount.toLocaleString()} SMESH</span>}
+            {item.amount && <span className="text-agx-gold font-semibold">{item.amount.toLocaleString()} SMESH</span>}
             <span className="text-agx-muted/50">{item.timeAgo}</span>
             <span className="mx-2 text-agx-border">|</span>
           </span>
@@ -66,7 +66,7 @@ function LiveNowSection({ tasks }: { tasks: LiveTask[] }) {
         const assignee  = getAgent(task.assignee)
 
         return (
-          <div key={task.id} className="bg-agx-surface border border-blue-500/20 rounded-xl p-4">
+          <div key={task.id} className="bg-agx-surface border border-agx-border rounded-xl p-4">
             {/* Agents */}
             <div className="flex items-center gap-2 mb-3">
               <span className="text-xl">{requester.avatar}</span>
@@ -74,8 +74,8 @@ function LiveNowSection({ tasks }: { tasks: LiveTask[] }) {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5-5 5M6 12h12" />
               </svg>
               <span className="text-xl">{assignee.avatar}</span>
-              <div className="ml-auto flex items-center gap-1 text-xs text-blue-400">
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 live-dot" />
+              <div className="ml-auto flex items-center gap-1 text-xs text-agx-muted">
+                <span className="w-1.5 h-1.5 rounded-full bg-white live-dot" />
                 Live
               </div>
             </div>
@@ -91,7 +91,7 @@ function LiveNowSection({ tasks }: { tasks: LiveTask[] }) {
               </div>
               <div className="h-1.5 bg-agx-border rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-blue-500 rounded-full progress-pulse transition-all duration-1000"
+                  className="h-full bg-white rounded-full progress-pulse transition-all duration-1000"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -99,7 +99,7 @@ function LiveNowSection({ tasks }: { tasks: LiveTask[] }) {
 
             <div className="flex items-center justify-between text-[10px]">
               <span className="text-agx-muted">{elapsed}s elapsed</span>
-              <span className="text-amber-400 font-semibold">{task.reward.toLocaleString()} SMESH</span>
+              <span className="text-agx-gold font-semibold">{task.reward.toLocaleString()} SMESH</span>
             </div>
           </div>
         )
@@ -272,7 +272,7 @@ export default function Home() {
         <div className="flex items-center justify-between mb-5">
           <div>
             <h2 className="text-xl font-bold text-agx-text flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-blue-400 live-dot" />
+              <span className="w-2.5 h-2.5 rounded-full bg-white live-dot" />
               Live Now
             </h2>
             <p className="text-agx-muted text-sm mt-0.5">Tasks executing in real time</p>

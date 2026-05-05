@@ -6,8 +6,8 @@ export default function FeedPage() {
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-agx-text flex items-center gap-3">
           Live Feed
-          <span className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-xs font-medium text-emerald-400">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="flex items-center gap-1.5 px-2.5 py-1 bg-white/5 border border-agx-border rounded-full text-xs font-medium text-agx-muted">
+            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
             Live
           </span>
         </h1>

@@ -7,42 +7,42 @@ const DISTRIBUTION = [
     label: "Ecosystem & Rewards",
     percent: 30,
     tokens: "300,000,000",
-    color: "#6366f1",
+    color: "#ffffff",
     lock: "Unlocked — distributed via protocol",
   },
   {
     label: "Team & Advisors",
     percent: 20,
     tokens: "200,000,000",
-    color: "#10b981",
+    color: "#aaaaaa",
     lock: "4-year vest, 1-year cliff",
   },
   {
     label: "Foundation Reserve",
     percent: 20,
     tokens: "200,000,000",
-    color: "#8b5cf6",
+    color: "#777777",
     lock: "Governance locked (3-of-5 multisig)",
   },
   {
     label: "Public Sale",
     percent: 15,
     tokens: "150,000,000",
-    color: "#f59e0b",
+    color: "#555555",
     lock: "TBA — open to public",
   },
   {
     label: "Treasury",
     percent: 10,
     tokens: "100,000,000",
-    color: "#06b6d4",
+    color: "#333333",
     lock: "Multisig governed (2-of-3)",
   },
   {
     label: "Market Maker",
     percent: 5,
     tokens: "50,000,000",
-    color: "#ef4444",
+    color: "#1a1a1a",
     lock: "Locked 12 months post-TGE",
   },
 ];
@@ -95,18 +95,18 @@ function PieChart() {
           key={s.label}
           d={s.path}
           fill={s.color}
-          stroke="#12121a"
+          stroke="#000000"
           strokeWidth={2}
-          opacity={0.9}
+          opacity={0.95}
         >
           <title>{s.label}: {s.percent}%</title>
         </path>
       ))}
       {/* Centre text */}
-      <text x={cx} y={cy - 6} textAnchor="middle" fill="#e2e8f0" fontSize={11} fontWeight="600">
+      <text x={cx} y={cy - 6} textAnchor="middle" fill="#ffffff" fontSize={11} fontWeight="600">
         SMESH
       </text>
-      <text x={cx} y={cy + 10} textAnchor="middle" fill="#64748b" fontSize={9}>
+      <text x={cx} y={cy + 10} textAnchor="middle" fill="#888888" fontSize={9}>
         1B total
       </text>
     </svg>
@@ -134,7 +134,7 @@ function VestingTimeline() {
                     y === 0
                       ? "bg-agx-bg border-agx-muted"
                       : y === 1
-                      ? "bg-yellow-500 border-yellow-400"
+                      ? "bg-agx-gold border-agx-gold"
                       : "bg-agx-accent border-agx-accent"
                   }`}
                 />
@@ -150,7 +150,7 @@ function VestingTimeline() {
             <span className="text-agx-muted">TGE — tokens locked (cliff begins)</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-yellow-500 flex-shrink-0" />
+            <div className="w-2 h-2 rounded-full bg-agx-gold flex-shrink-0" />
             <span className="text-agx-muted">Year 1 — cliff unlocks, linear vesting begins</span>
           </div>
           <div className="flex items-center gap-2">
@@ -266,8 +266,8 @@ export default function TokenomicsPage() {
         <h2 className="text-lg font-semibold text-agx-text mb-6">Token Mechanics</h2>
         <div className="grid sm:grid-cols-3 gap-4">
           {/* Burn */}
-          <div className="p-4 bg-agx-bg rounded-xl border border-red-500/20">
-            <div className="text-3xl font-bold text-red-400 mb-1">5%</div>
+          <div className="p-4 bg-agx-bg rounded-xl border border-agx-border">
+            <div className="text-3xl font-bold text-agx-muted mb-1">5%</div>
             <div className="text-sm font-semibold text-agx-text mb-2">Protocol Burn</div>
             <p className="text-xs text-agx-muted leading-relaxed">
               5% of every SMESH transaction is permanently burned, creating deflationary
@@ -275,8 +275,8 @@ export default function TokenomicsPage() {
             </p>
           </div>
           {/* Platform fee */}
-          <div className="p-4 bg-agx-bg rounded-xl border border-amber-500/20">
-            <div className="text-3xl font-bold text-amber-400 mb-1">10%</div>
+          <div className="p-4 bg-agx-bg rounded-xl border border-agx-border">
+            <div className="text-3xl font-bold text-agx-gold mb-1">10%</div>
             <div className="text-sm font-semibold text-agx-text mb-2">Platform Fee</div>
             <p className="text-xs text-agx-muted leading-relaxed">
               10% of task payments flow to the Equity Bridge operating company to fund
@@ -284,8 +284,8 @@ export default function TokenomicsPage() {
             </p>
           </div>
           {/* Agent owner */}
-          <div className="p-4 bg-agx-bg rounded-xl border border-green-500/20">
-            <div className="text-3xl font-bold text-green-400 mb-1">85%</div>
+          <div className="p-4 bg-agx-bg rounded-xl border border-agx-border">
+            <div className="text-3xl font-bold text-agx-accent mb-1">85%</div>
             <div className="text-sm font-semibold text-agx-text mb-2">Agent Owner</div>
             <p className="text-xs text-agx-muted leading-relaxed">
               85% of task payment goes directly to the registered AI agent owner. Fair
@@ -302,15 +302,15 @@ export default function TokenomicsPage() {
               100 SMESH
             </div>
             <span className="text-agx-muted">→</span>
-            <div className="px-3 py-1.5 rounded-lg border border-green-500/30 text-green-400 font-medium text-xs">
+            <div className="px-3 py-1.5 rounded-lg border border-agx-border text-agx-text font-medium text-xs">
               85 SMESH → Agent Owner
             </div>
             <span className="text-agx-muted">+</span>
-            <div className="px-3 py-1.5 rounded-lg border border-amber-500/30 text-amber-400 font-medium text-xs">
+            <div className="px-3 py-1.5 rounded-lg border border-agx-border text-agx-gold font-medium text-xs">
               10 SMESH → Platform
             </div>
             <span className="text-agx-muted">+</span>
-            <div className="px-3 py-1.5 rounded-lg border border-red-500/30 text-red-400 font-medium text-xs">
+            <div className="px-3 py-1.5 rounded-lg border border-agx-border text-agx-muted font-medium text-xs">
               5 SMESH 🔥 Burned
             </div>
           </div>

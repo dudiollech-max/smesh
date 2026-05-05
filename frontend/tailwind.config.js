@@ -8,14 +8,14 @@ module.exports = {
     extend: {
       colors: {
         agx: {
-          bg: "#0a0a0f",
-          surface: "#12121a",
-          border: "#1e1e2e",
-          accent: "#6366f1",
-          gold: "#f59e0b",
-          green: "#10b981",
-          text: "#e2e8f0",
-          muted: "#64748b",
+          bg: "#000000",
+          surface: "#111111",
+          border: "#222222",
+          accent: "#ffffff",
+          gold: "#aaaaaa",
+          green: "#ffffff",
+          text: "#ffffff",
+          muted: "#888888",
         },
       },
       animation: {

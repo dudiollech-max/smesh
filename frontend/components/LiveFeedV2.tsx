@@ -17,11 +17,11 @@ function formatSmesh(n: number) {
 // ─── Type config ──────────────────────────────────────────────────────────────
 
 const TYPE_STYLE: Record<AgentMessage['type'], { label: string; border: string; badge: string; dot: string }> = {
-  request:   { label: 'Request',   border: 'border-blue-500/20',   badge: 'bg-blue-500/10 text-blue-400 border-blue-500/30',   dot: 'bg-blue-400' },
-  response:  { label: 'Response',  border: 'border-emerald-500/20',badge: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30', dot: 'bg-emerald-400' },
-  tip:       { label: 'Tip',       border: 'border-amber-500/30',  badge: 'bg-amber-500/10 text-amber-400 border-amber-500/30', dot: 'bg-amber-400' },
-  complete:  { label: 'Complete',  border: 'border-purple-500/30', badge: 'bg-purple-500/10 text-purple-400 border-purple-500/30', dot: 'bg-purple-400' },
-  broadcast: { label: 'Broadcast', border: 'border-agx-border',    badge: 'bg-agx-border/50 text-agx-muted border-agx-border', dot: 'bg-agx-muted' },
+  request:   { label: 'Request',   border: 'border-white/20',       badge: 'bg-white/10 text-white border-white/30',            dot: 'bg-white' },
+  response:  { label: 'Response',  border: 'border-white/10',       badge: 'bg-white/5 text-agx-muted border-white/15',         dot: 'bg-agx-muted' },
+  tip:       { label: 'Tip',       border: 'border-white/30',       badge: 'bg-white/15 text-white border-white/40',            dot: 'bg-white' },
+  complete:  { label: 'Complete',  border: 'border-white/10',       badge: 'bg-white/5 text-agx-muted border-white/10',         dot: 'bg-agx-muted' },
+  broadcast: { label: 'Broadcast', border: 'border-agx-border',     badge: 'bg-agx-border/50 text-agx-muted border-agx-border', dot: 'bg-agx-muted' },
 }
 
 // ─── Feed Message Row ─────────────────────────────────────────────────────────
@@ -62,7 +62,7 @@ function FeedRow({ message, task, onSelect }: FeedRowProps) {
             {style.label}
           </span>
           {message.smeshAmount && (
-            <span className="text-amber-400 text-xs font-bold">
+            <span className="text-agx-gold text-xs font-bold">
               {message.type === 'tip' ? '+' : ''}{message.smeshAmount.toLocaleString()} SMESH
             </span>
           )}
@@ -86,13 +86,13 @@ function StatsTicker({ stats }: TickerProps) {
   return (
     <div className="flex items-center gap-6 text-xs font-mono overflow-hidden">
       <span className="flex items-center gap-1.5 text-agx-text">
-        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+        <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
         {stats.activeAgents} agents active
       </span>
       <span className="text-agx-muted">⚡ <span className="text-agx-text font-semibold">{stats.tasksCompleted.toLocaleString()}</span> tasks completed</span>
-      <span className="text-agx-muted">💎 <span className="text-amber-400 font-semibold">{formatSmesh(stats.smeshVolume)} SMESH</span> traded</span>
+      <span className="text-agx-muted">💎 <span className="text-agx-text font-semibold">{formatSmesh(stats.smeshVolume)} SMESH</span> traded</span>
       {stats.activeTasks.length > 0 && (
-        <span className="text-agx-muted">🔄 <span className="text-blue-400 font-semibold">{stats.activeTasks.length}</span> in progress</span>
+        <span className="text-agx-muted">🔄 <span className="text-agx-text font-semibold">{stats.activeTasks.length}</span> in progress</span>
       )}
     </div>
   )
@@ -155,7 +155,7 @@ function AgentNetwork({ recentMessages }: { recentMessages: AgentMessage[] }) {
               key={line.id}
               x1={from.x} y1={from.y}
               x2={to.x} y2={to.y}
-              stroke="#6366f1"
+              stroke="rgba(255,255,255,0.5)"
               strokeWidth="1"
               strokeOpacity="0.6"
               strokeDasharray="4 2"
@@ -168,8 +168,8 @@ function AgentNetwork({ recentMessages }: { recentMessages: AgentMessage[] }) {
           <g key={dot.name} transform={`translate(${dot.x},${dot.y})`}>
             <circle
               r={dot.active ? 7 : 5}
-              fill={dot.active ? '#6366f1' : '#1e1e2e'}
-              stroke={dot.active ? '#818cf8' : '#2e2e4e'}
+              fill={dot.active ? '#ffffff' : '#1a1a1a'}
+              stroke={dot.active ? 'rgba(255,255,255,0.8)' : '#333333'}
               strokeWidth="1.5"
               className={dot.active ? 'network-dot-active' : ''}
             />
@@ -177,13 +177,13 @@ function AgentNetwork({ recentMessages }: { recentMessages: AgentMessage[] }) {
               textAnchor="middle"
               dy="0.35em"
               fontSize="7"
-              fill="#e2e8f0"
+              fill={dot.active ? '#000000' : '#888888'}
               style={{ userSelect: 'none', pointerEvents: 'none' }}
             >
               {dot.avatar}
             </text>
             {dot.active && (
-              <circle r="11" fill="none" stroke="#6366f1" strokeWidth="1" opacity="0.4" className="network-ping" />
+              <circle r="11" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="1" opacity="0.4" className="network-ping" />
             )}
           </g>
         ))}
@@ -298,7 +298,7 @@ export function LiveFeedV2() {
           <span className="ml-2 text-xs font-normal text-agx-muted">streaming in real time</span>
         </h2>
         <div className="flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
           <span className="text-xs text-agx-muted">Live</span>
         </div>
       </div>
