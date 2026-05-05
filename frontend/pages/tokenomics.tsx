@@ -351,7 +351,7 @@ export default function TokenomicsPage() {
             earn trading fees.
           </p>
           <a
-            href="https://aerodrome.finance/swap?inputCurrency=ETH&outputCurrency=TBD_SMESH_ADDRESS"
+            href="https://aerodrome.finance/swap?inputCurrency=ETH&outputCurrency=0xDA31b578841d6d4417Dba55EFbdbF068e101a67a"
             target="_blank"
             rel="noopener noreferrer"
             className="px-8 py-3 bg-agx-accent hover:bg-agx-accent/90 text-white font-semibold rounded-xl transition-colors"
