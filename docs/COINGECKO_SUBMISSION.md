@@ -80,7 +80,7 @@
 | **Trading Pair** | SMESH/WETH |
 | **Pool URL** | **[TBD — insert Aerodrome pool link after liquidity deployed]** |
 | **Initial Liquidity Provider** | Litial Consulting FZ LLC (Market Maker allocation: 50M SMESH) |
-| **CEX Listings** | None at launch; targeting Tier-2 CEX post-Reg A+ |
+| **CEX Listings** | None at launch; targeting Tier-2 CEX post- |
 | **Uniswap V3 (Base)** | Possible secondary pool (TBD) |
 
 ---
@@ -92,7 +92,7 @@
 | Ecosystem & Rewards | 30% | 300,000,000 | Protocol-distributed; 2-of-3 multisig |
 | Team & Advisors | 20% | 200,000,000 | 4yr vest, 1yr cliff — TokenVesting.sol |
 | Foundation Reserve | 20% | 200,000,000 | 3-of-5 governance multisig |
-| Public Sale (Reg A+) | 15% | 150,000,000 | Locked until offering approved |
+| Public Sale | 15% | 150,000,000 | Locked until offering approved |
 | Treasury | 10% | 100,000,000 | Operations — 2-of-3 multisig |
 | Market Maker | 5% | 50,000,000 | Locked 12 months post-TGE |
 
@@ -105,7 +105,7 @@
 | Team & Advisors | Linear vest | 12 months | 48 months |
 | Market Maker | Hard lock | — | 12 months (full unlock) |
 | Foundation Reserve | Governance multisig | N/A | No time-lock; governance controls |
-| Public Sale | Hard lock | — | Until Reg A+ approval |
+| Public Sale | Hard lock | — | Until  approval |
 
 ---
 

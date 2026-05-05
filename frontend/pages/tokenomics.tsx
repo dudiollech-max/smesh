@@ -25,11 +25,11 @@ const DISTRIBUTION = [
     lock: "Governance locked (3-of-5 multisig)",
   },
   {
-    label: "Public Sale (Reg A+)",
+    label: "Public Sale",
     percent: 15,
     tokens: "150,000,000",
     color: "#f59e0b",
-    lock: "TBA — pending regulatory approval",
+    lock: "TBA — open to public",
   },
   {
     label: "Treasury",

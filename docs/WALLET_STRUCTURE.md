@@ -13,7 +13,7 @@
 | Ecosystem Multisig | 2-of-3 Gnosis Safe | 30% | 300,000,000 SMESH | Ecosystem rewards; distributed via protocol |
 | Team Vesting Contract | TokenVesting.sol | 20% | 200,000,000 SMESH | 4-year vest, 1-year cliff; individual schedules |
 | Treasury Multisig | 2-of-3 Gnosis Safe | 10% | 100,000,000 SMESH | Operations & partnerships; multisig governed |
-| Public Sale Wallet | EOA / Reg A+ | 15% | 150,000,000 SMESH | Locked until Reg A+ offering approved |
+| Public Sale Wallet | EOA /  | 15% | 150,000,000 SMESH | Locked until  offering approved |
 | Market Maker Wallet | Smart contract lock | 5% | 50,000,000 SMESH | Locked 12 months post-TGE |
 
 ---
@@ -145,7 +145,7 @@ Network: Base
 
 **Allocation:** 150,000,000 SMESH (15%)
 
-**Status:** Locked until SEC/BVI approval for Reg A+ offering.
+**Status:** Locked until SEC/BVI approval for  offering.
 
 **Recommended structure:**
 - Use a 2-of-3 Gnosis Safe controlled by Foundation + legal counsel
