@@ -28,12 +28,39 @@
 🔍 Basescan: https://basescan.org/address/0xDA31b578841d6d4417Dba55EFbdbF068e101a67a
 
 ### Token Distribution — 1,000,000,000 SMESH ✅
-| Wallet | Address | SMESH | % |
-|--------|---------|-------|---|
-| Foundation | `0x715Eec1f3451aBd35bb0D2ac17d85086BC175A31` | 200,000,000 | 20% |
-| Ecosystem | `0x280d5A5C052AD64C4f72f58f694C33beD29E175E` | 300,000,000 | 30% |
-| Team (vesting) | `0xBd7d1f340fb6f24E1B8bEe442ba096c47AEA998B` | 200,000,000 | 20% |
-| Deployer / Reserve | `0xA03EAa3EE2E6785272E06427afD58a59D61DEEDa` | 300,000,000 | 30% |
+
+#### 🏛️ Smesh Foundation (20% — 200,000,000 SMESH)
+- **Wallet:** `0x715Eec1f3451aBd35bb0D2ac17d85086BC175A31`
+- **Network:** Base Mainnet
+- **Purpose:** Protocol grants, development funding, governance
+- **Basescan:** https://basescan.org/address/0x715Eec1f3451aBd35bb0D2ac17d85086BC175A31
+
+#### 🌱 Ecosystem & Rewards (30% — 300,000,000 SMESH)
+- **Wallet:** `0x280d5A5C052AD64C4f72f58f694C33beD29E175E`
+- **Network:** Base Mainnet
+- **Purpose:** Agent rewards, user incentives, early adopters
+- **Basescan:** https://basescan.org/address/0x280d5A5C052AD64C4f72f58f694C33beD29E175E
+
+#### 👥 Team & Advisors (20% — 200,000,000 SMESH)
+- **Wallet:** `0xBd7d1f340fb6f24E1B8bEe442ba096c47AEA998B`
+- **Network:** Base Mainnet
+- **Vesting Contract:** `0xd0ac3e32cC215c793f3BCE61d05157AdA380AED6`
+- **Lock:** 4-year vest, 1-year cliff — unlocks May 2027, fully vested May 2030
+- **Basescan:** https://basescan.org/address/0xBd7d1f340fb6f24E1B8bEe442ba096c47AEA998B
+
+#### 🏦 Reserve / Deployer (30% — 300,000,000 SMESH)
+- **Wallet:** `0xA03EAa3EE2E6785272E06427afD58a59D61DEEDa`
+- **Network:** Base Mainnet
+- **Purpose:** Treasury (100M) + Public Sale (150M) + Market Maker (50M)
+- **Basescan:** https://basescan.org/address/0xA03EAa3EE2E6785272E06427afD58a59D61DEEDa
+
+#### Summary Table
+| Category | Wallet | SMESH | % |
+|----------|--------|-------|---|
+| Foundation | `0x715E...A31` | 200,000,000 | 20% |
+| Ecosystem | `0x280d...175E` | 300,000,000 | 30% |
+| Team (vesting) | `0xBd7d...998B` | 200,000,000 | 20% |
+| Reserve / Deployer | `0xA03E...EEDa` | 300,000,000 | 30% |
 | **Total** | | **1,000,000,000** | **100%** |
 
 > Team allocation is locked in `TokenVesting` contract — 4yr vest, 1yr cliff (unlocks May 2027)
