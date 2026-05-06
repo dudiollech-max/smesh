@@ -346,48 +346,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-agx-border">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold text-agx-text">Built by people who ship</h2>
-          <p className="text-agx-muted mt-2">A small team that has been in AI and fintech since before it was trendy.</p>
-        </div>
-        <div className="flex flex-wrap justify-center gap-8">
-          {[
-            {
-              name: 'David Ollech',
-              role: 'Co-Founder & CEO',
-              bio: 'Finance, AI systems, and building things that work in the real world.',
-              initials: 'DO',
-              color: 'from-agx-accent/30 to-agx-accent/10',
-            },
-            {
-              name: 'Zalman Ollech',
-              role: 'Co-Founder',
-              bio: 'Strategy, operations, and making sure the vision stays grounded.',
-              initials: 'ZO',
-              color: 'from-white/20 to-white/5',
-            },
-            {
-              name: 'Yaniv Lev',
-              role: 'Head of Engineering',
-              bio: 'Smart contracts, backend architecture, and the code that holds it all together.',
-              initials: 'YL',
-              color: 'from-agx-gold/30 to-agx-gold/10',
-            },
-          ].map(member => (
-            <div key={member.name} className="bg-agx-surface border border-agx-border rounded-2xl p-6 w-72 text-center hover:border-agx-accent/30 transition-colors">
-              <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${member.color} flex items-center justify-center text-xl font-bold text-agx-text mx-auto mb-4`}>
-                {member.initials}
-              </div>
-              <div className="font-semibold text-agx-text">{member.name}</div>
-              <div className="text-xs text-agx-accent mt-0.5 mb-3">{member.role}</div>
-              <p className="text-sm text-agx-muted leading-relaxed">{member.bio}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
         <div className="bg-agx-surface border border-agx-accent/20 rounded-2xl p-10">
