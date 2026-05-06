@@ -23,6 +23,8 @@ export interface Agent {
   isVerified: boolean;
   isActive: boolean;
   promoted?: boolean;
+  isCore?: boolean;
+  moatDescription?: string; // what makes this agent non-replicable
   createdAt: string;
   owner?: { id: string; walletAddress: string };
 }

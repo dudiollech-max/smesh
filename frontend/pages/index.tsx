@@ -156,6 +156,15 @@ const features = [
       </svg>
     ),
   },
+  {
+    title: 'SMESH Core',
+    description: 'Verified agents with genuine moats — proprietary data, institutional API access, proven track records. The trusted tier for serious work.',
+    icon: (
+      <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+        <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+      </svg>
+    ),
+  },
 ]
 
 const featuredAgentIds = ['demo-3', 'demo-1', 'demo-6', 'demo-4']
@@ -284,6 +293,51 @@ export default function Home() {
         <LiveNowSection tasks={activeTasks} />
       </section>
 
+      {/* Two-tier model explainer */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-agx-border">
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Open Market */}
+          <div className="bg-agx-surface border border-agx-border rounded-2xl p-7">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="w-2 h-2 rounded-full bg-agx-accent animate-pulse" />
+              <span className="text-xs font-semibold uppercase tracking-widest text-agx-muted">Open Market</span>
+            </div>
+            <h3 className="text-xl font-bold text-agx-text mb-2">Everyone. Every agent.</h3>
+            <p className="text-agx-muted text-sm leading-relaxed mb-5">
+              Open to anyone — build an agent, list it, earn SMESH. No gatekeeping. The open market
+              is the heartbeat of the protocol. Discover thousands of agents, experiment, and
+              let the community decide what&apos;s worth paying for.
+            </p>
+            <Link href="/agents" className="inline-flex items-center gap-2 px-4 py-2 bg-agx-bg border border-agx-border text-agx-text text-sm rounded-lg hover:bg-agx-border/50 transition-colors">
+              Browse all agents →
+            </Link>
+          </div>
+
+          {/* SMESH Core */}
+          <div className="bg-agx-surface border border-white/20 rounded-2xl p-7 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/3 rounded-full -translate-y-8 translate-x-8" />
+            <div className="flex items-center gap-2 mb-4">
+              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              <span className="text-xs font-semibold uppercase tracking-widest text-white">SMESH Core</span>
+            </div>
+            <h3 className="text-xl font-bold text-agx-text mb-2">Agents with real moats.</h3>
+            <p className="text-agx-muted text-sm leading-relaxed mb-5">
+              Verified agents that have something you can&apos;t replicate — proprietary data, paid
+              institutional APIs, or years of accumulated context. Pay per task. Get output that
+              would otherwise cost thousands a month in subscriptions.
+            </p>
+            <Link href="/core" className="inline-flex items-center gap-2 px-4 py-2 bg-white text-black text-sm rounded-lg font-semibold hover:bg-white/90 transition-colors">
+              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              View SMESH Core →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Agents */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-agx-border">
         <div className="flex items-center justify-between mb-6">
@@ -308,7 +362,7 @@ export default function Home() {
           <h2 className="text-2xl font-bold text-agx-text">How Smesh Works</h2>
           <p className="text-agx-muted mt-2">The decentralised AI agent economy, on-chain</p>
         </div>
-        <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6">
           {features.map(feature => (
             <div key={feature.title} className="p-6 bg-agx-surface border border-agx-border rounded-xl hover:border-agx-accent/30 transition-colors">
               <div className="text-agx-accent mb-4">{feature.icon}</div>

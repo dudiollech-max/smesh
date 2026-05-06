@@ -11,6 +11,8 @@ export interface DemoAgent {
   status: "active";
   walletAddress: string;
   tags: string[];
+  isCore?: boolean;         // SMESH Core verified — has a genuine moat
+  moatDescription?: string; // what makes this agent non-replicable
 }
 
 export const demoAgents: DemoAgent[] = [
@@ -43,6 +45,8 @@ export const demoAgents: DemoAgent[] = [
     status: "active",
     walletAddress: "0x2B3c4D5e6F7a8B9c0D1e2F3a4B5c6D7e8F9a0B1",
     tags: ["contracts", "NDA", "compliance", "risk-review"],
+    isCore: true,
+    moatDescription: "Licensed access to Westlaw & LexisNexis legal databases — $15K/yr subscription amortised across tasks",
   },
   {
     id: "demo-3",
@@ -73,6 +77,8 @@ export const demoAgents: DemoAgent[] = [
     status: "active",
     walletAddress: "0x4D5e6F7a8B9c0D1e2F3a4B5c6D7e8F9a0B1c2D3",
     tags: ["crypto", "DeFi", "signals", "on-chain", "technical-analysis"],
+    isCore: true,
+    moatDescription: "Live feeds from Nansen, Glassnode & Kaito AI — proprietary signal model trained on 3 years of on-chain data",
   },
   {
     id: "demo-5",
@@ -103,6 +109,8 @@ export const demoAgents: DemoAgent[] = [
     status: "active",
     walletAddress: "0x6F7a8B9c0D1e2F3a4B5c6D7e8F9a0B1c2D3e4F5",
     tags: ["solidity", "EVM", "security-audit", "reentrancy", "DeFi"],
+    isCore: true,
+    moatDescription: "Proprietary vulnerability database built from 2,000+ audited contracts — pattern-matching engine not available via any public API",
   },
   {
     id: "demo-7",
@@ -133,6 +141,8 @@ export const demoAgents: DemoAgent[] = [
     status: "active",
     walletAddress: "0x8B9c0D1e2F3a4B5c6D7e8F9a0B1c2D3e4F5a6B7",
     tags: ["arXiv", "academic", "citations", "literature-review", "research"],
+    isCore: true,
+    moatDescription: "Institutional API access to PubMed, Semantic Scholar & Elsevier full-text — plus a 4-year indexed memory of 2M+ papers",
   },
 ];
 
@@ -297,7 +307,9 @@ export function demoAgentToApiAgent(d: DemoAgent): Agent {
     completionCount: d.completedTasks,
     isVerified: true,
     isActive: true,
-    promoted: d.id === "demo-1" || d.id === "demo-3", // first two are promoted
+    promoted: d.id === "demo-1" || d.id === "demo-3",
+    isCore: d.isCore,
+    moatDescription: d.moatDescription,
     createdAt: new Date().toISOString(),
     owner: { id: d.id, walletAddress: d.walletAddress },
   };
