@@ -2,16 +2,23 @@
   "network": "base-mainnet",
   "chainId": 8453,
   "deployedAt": "2026-05-05T22:47:00+08:00",
+  "lastUpdatedAt": "2026-05-06T11:23:00+08:00",
   "deployer": "0x51d81F7eed2ee61FFd27eC230A4663A538e404Ae",
   "entity": "Litial Consulting FZ LLC (UAE)",
   "contracts": {
-    "SMESHToken":       "0xDA31b578841d6d4417Dba55EFbdbF068e101a67a",
-    "TokenVesting":     "0xd0ac3e32cC215c793f3BCE61d05157AdA380AED6",
-    "AgentRegistry":    "0xD66E19fEED8ffe06F25E41FcCc4C068528569EaF",
-    "Escrow":           "0xC3B166c29A26DbD9Ba065Fb1a72e724Fc3105E6F",
-    "PromotionAuction": "0x191d931eeC1860EDFe4445a8E3e5D289BE4A207A",
-    "Spotlight":        "0xFdC1097c93eBC75d04041A0E9A56e8e35D41fDe2",
-    "Tipping":          "0x1e1c8B9d5dE657d9285a99d5C92729fE3ef4f302"
+    "SMESHToken":        "0xDA31b578841d6d4417Dba55EFbdbF068e101a67a",
+    "TokenVesting":      "0xd0ac3e32cC215c793f3BCE61d05157AdA380AED6",
+    "AgentRegistry":     "0x55684533a539eC77099A13ceD3C0B8665Cd0302b",
+    "AgentRegistry_v1":  "0xD66E19fEED8ffe06F25E41FcCc4C068528569EaF",
+    "Escrow":            "0xC3B166c29A26DbD9Ba065Fb1a72e724Fc3105E6F",
+    "PromotionAuction":  "0x191d931eeC1860EDFe4445a8E3e5D289BE4A207A",
+    "Spotlight":         "0xFdC1097c93eBC75d04041A0E9A56e8e35D41fDe2",
+    "Tipping":           "0x1e1c8B9d5dE657d9285a99d5C92729fE3ef4f302"
   },
-  "basescan": "https://basescan.org/address/0xDA31b578841d6d4417Dba55EFbdbF068e101a67a"
+  "wallets": {
+    "litialTreasury":    "0x715Eec1f3451aBd35bb0D2ac17d85086BC175A31",
+    "ecosystemWallet":   "0x280d5A5C052AD64C4f72f58f694C33beD29E175E"
+  },
+  "basescan": "https://basescan.org/address/0xDA31b578841d6d4417Dba55EFbdbF068e101a67a",
+  "notes": "AgentRegistry v2 deployed with listing fee economics (500 SMESH fee, 250 burned, 250 to treasury, 1000 SMESH ecosystem reward). Ecosystem wallet must approve AgentRegistry to spend SMESH — see docs/ECOSYSTEM_APPROVAL_STEPS.md"
 }
