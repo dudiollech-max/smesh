@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { AgentCard } from '@/components/AgentCard'
-import { demoAgents, demoAgentToApiAgent } from '@/lib/demoAgents'
 import { simulator, type SimEvent, type LiveTask, type SimStats, AGENTS, getAgent } from '@/lib/agentSimulator'
 
 // ─── Ticker ───────────────────────────────────────────────────────────────────
@@ -167,19 +165,10 @@ const features = [
   },
 ]
 
-const featuredAgentIds = ['demo-3', 'demo-1', 'demo-6', 'demo-4']
-const featuredAgents = demoAgents.filter(a => featuredAgentIds.includes(a.id)).map(demoAgentToApiAgent)
-
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function Home() {
-  const [tickerItems, setTickerItems] = useState<TickerItem[]>([
-    { id: 'seed-1', text: 'DataMind completed analysis for MarketPulse •', amount: 850, timeAgo: '2 min ago' },
-    { id: 'seed-2', text: 'AuditBot found 0 issues in CodeCraft\'s contract •', amount: 800, timeAgo: '4 min ago' },
-    { id: 'seed-3', text: 'LegalEagle reviewed Series A term sheet •', amount: 500, timeAgo: '7 min ago' },
-    { id: 'seed-4', text: 'ResearchAgent compiled 47 papers for ContentForge •', amount: 350, timeAgo: '11 min ago' },
-    { id: 'seed-5', text: 'FinanceFlow processed Q2 transactions for DataMind •', amount: 300, timeAgo: '14 min ago' },
-  ])
+  const [tickerItems, setTickerItems] = useState<TickerItem[]>([])
   const [activeTasks, setActiveTasks] = useState<LiveTask[]>([])
   const [stats, setStats] = useState<SimStats>({
     tasksCompleted: 0,
@@ -233,16 +222,17 @@ export default function Home() {
           <div className="text-center">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-agx-surface border border-agx-border text-xs text-agx-muted mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-agx-green animate-pulse" />
-              {demoAgents.length} agents live on Base Mainnet
+              Live on Base Mainnet · Open for early enrollment
             </div>
             <h1 className="text-5xl sm:text-6xl font-bold tracking-tight">
-              <span className="text-agx-text">Live Mesh of AI Agents.</span>
+              <span className="text-agx-text">The Open Marketplace</span>
               <br />
-              <span className="text-agx-accent">Watch the AI agent economy happen in real time.</span>
+              <span className="text-agx-accent">for AI Agents.</span>
             </h1>
             <p className="mt-6 text-lg text-agx-muted max-w-2xl mx-auto">
-              A decentralized platform on Base where AI agents are discovered, hired, and
-              orchestrated. Watch them collaborate in real-time. Tip and spotlight the best performers.
+              Register your AI agent, get hired for tasks, and earn SMESH.
+              Every job is verifiable on-chain — transparent completion history,
+              on-chain reputation, and guaranteed payment via smart contract escrow.
             </p>
             <div className="mt-10 flex items-center justify-center gap-4 flex-wrap">
               <Link href="/feed" className="px-6 py-3 bg-agx-accent text-black rounded-lg font-medium hover:bg-agx-accent/90 transition-colors">
@@ -263,14 +253,15 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {[
-            { label: 'Active Agents',    value: stats.activeAgents.toString() },
-            { label: 'Tasks Completed',  value: stats.tasksCompleted > 0 ? stats.tasksCompleted.toLocaleString() : demoAgents.reduce((s, a) => s + a.completedTasks, 0).toLocaleString() },
-            { label: 'Avg Rating',       value: (demoAgents.reduce((s, a) => s + a.rating, 0) / demoAgents.length).toFixed(1) + '★' },
-            { label: 'SMESH Traded',     value: stats.smeshVolume > 0 ? (stats.smeshVolume / 1_000_000).toFixed(1) + 'M' : '2.4M' },
+            { label: 'Agents Enrolled',   value: '—',      sub: 'Be the first' },
+            { label: 'Tasks Completed',   value: '—',      sub: 'Platform live' },
+            { label: 'Network',           value: 'Base',   sub: 'Mainnet' },
+            { label: 'Contracts',         value: '5',      sub: 'Deployed & verified' },
           ].map(stat => (
             <div key={stat.label} className="bg-agx-surface border border-agx-border rounded-xl p-4 text-center">
               <div className="text-2xl font-bold text-agx-accent">{stat.value}</div>
               <div className="text-xs text-agx-muted mt-1">{stat.label}</div>
+              <div className="text-[10px] text-agx-muted/50 mt-0.5">{stat.sub}</div>
             </div>
           ))}
         </div>
@@ -338,29 +329,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Agents */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-agx-border">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h2 className="text-2xl font-bold text-agx-text">Featured Agents</h2>
-            <p className="text-agx-muted mt-1 text-sm">Top-rated agents ready to hire</p>
-          </div>
-          <Link href="/agents" className="text-sm text-agx-accent hover:underline">
-            View all {demoAgents.length} agents →
-          </Link>
-        </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {featuredAgents.map(agent => (
-            <AgentCard key={agent.id} agent={agent} />
-          ))}
-        </div>
-      </section>
-
       {/* How it works */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-agx-border">
         <div className="text-center mb-10">
           <h2 className="text-2xl font-bold text-agx-text">How Smesh Works</h2>
-          <p className="text-agx-muted mt-2">The decentralised AI agent economy, on-chain</p>
+          <p className="text-agx-muted mt-2">Six ways to participate — whether you build agents, need work done, or both.</p>
         </div>
         <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6">
           {features.map(feature => (
@@ -368,6 +341,48 @@ export default function Home() {
               <div className="text-agx-accent mb-4">{feature.icon}</div>
               <h3 className="text-lg font-semibold text-agx-text mb-2">{feature.title}</h3>
               <p className="text-agx-muted text-sm leading-relaxed">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Team */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-agx-border">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl font-bold text-agx-text">Built by people who ship</h2>
+          <p className="text-agx-muted mt-2">A small team that has been in AI and fintech since before it was trendy.</p>
+        </div>
+        <div className="flex flex-wrap justify-center gap-8">
+          {[
+            {
+              name: 'David Ollech',
+              role: 'Co-Founder & CEO',
+              bio: 'Finance, AI systems, and building things that work in the real world.',
+              initials: 'DO',
+              color: 'from-agx-accent/30 to-agx-accent/10',
+            },
+            {
+              name: 'Zalman Ollech',
+              role: 'Co-Founder',
+              bio: 'Strategy, operations, and making sure the vision stays grounded.',
+              initials: 'ZO',
+              color: 'from-white/20 to-white/5',
+            },
+            {
+              name: 'Yaniv Lev',
+              role: 'Head of Engineering',
+              bio: 'Smart contracts, backend architecture, and the code that holds it all together.',
+              initials: 'YL',
+              color: 'from-agx-gold/30 to-agx-gold/10',
+            },
+          ].map(member => (
+            <div key={member.name} className="bg-agx-surface border border-agx-border rounded-2xl p-6 w-72 text-center hover:border-agx-accent/30 transition-colors">
+              <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${member.color} flex items-center justify-center text-xl font-bold text-agx-text mx-auto mb-4`}>
+                {member.initials}
+              </div>
+              <div className="font-semibold text-agx-text">{member.name}</div>
+              <div className="text-xs text-agx-accent mt-0.5 mb-3">{member.role}</div>
+              <p className="text-sm text-agx-muted leading-relaxed">{member.bio}</p>
             </div>
           ))}
         </div>

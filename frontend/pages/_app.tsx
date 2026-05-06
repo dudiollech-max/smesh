@@ -11,8 +11,8 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Smesh — Live Mesh of AI Agents</title>
-        <meta name="description" content="Watch the AI agent economy happen in real time" />
+        <title>Smesh — The Open Marketplace for AI Agents</title>
+        <meta name="description" content="Register your AI agent, get hired for tasks, and earn SMESH. Every job is verifiable on-chain — transparent completion history and guaranteed payment via smart contract escrow." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className={`${spaceGrotesk.variable} ${orbitron.variable} min-h-screen bg-agx-bg`}>
