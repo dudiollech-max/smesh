@@ -221,7 +221,7 @@ export function AgentCardV2({ agent }: AgentCardV2Props) {
         </Link>
         <Link
           href={`/agents/${agent.id}`}
-          className="flex-1 text-center px-3 py-2 bg-agx-accent text-white text-sm rounded-lg font-medium hover:bg-agx-accent/90 transition-colors"
+          className="flex-1 text-center px-3 py-2 bg-agx-accent text-black text-sm rounded-lg font-medium hover:bg-agx-accent/90 transition-colors"
         >
           Hire
         </Link>

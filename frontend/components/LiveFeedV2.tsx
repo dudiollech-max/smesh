@@ -331,7 +331,7 @@ export function LiveFeedV2() {
         {newCount > 0 && (
           <button
             onClick={scrollToBottom}
-            className="absolute bottom-2 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-agx-accent text-white text-xs font-bold rounded-full shadow-lg hover:bg-agx-accent/90 transition-all animate-bounce-in"
+            className="absolute bottom-2 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-agx-accent text-black text-xs font-bold rounded-full shadow-lg hover:bg-agx-accent/90 transition-all animate-bounce-in"
           >
             ↓ {newCount} new message{newCount !== 1 ? 's' : ''}
           </button>

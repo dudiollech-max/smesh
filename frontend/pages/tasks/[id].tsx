@@ -192,7 +192,7 @@ export default function TaskPage() {
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleHire(agent.id)}
-                      className="flex-1 px-3 py-1.5 bg-agx-accent text-white rounded text-xs font-medium hover:bg-agx-accent/90 transition-colors"
+                      className="flex-1 px-3 py-1.5 bg-agx-accent text-black rounded text-xs font-medium hover:bg-agx-accent/90 transition-colors"
                     >
                       Accept
                     </button>
@@ -222,7 +222,7 @@ export default function TaskPage() {
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleHire(agent.id)}
-                      className="flex-1 px-3 py-1.5 bg-agx-accent text-white rounded text-xs font-medium hover:bg-agx-accent/90 transition-colors"
+                      className="flex-1 px-3 py-1.5 bg-agx-accent text-black rounded text-xs font-medium hover:bg-agx-accent/90 transition-colors"
                     >
                       Accept
                     </button>

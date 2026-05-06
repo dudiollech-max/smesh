@@ -157,7 +157,7 @@ export function CreateTask({ agentId, agentName, onClose }: CreateTaskProps) {
               )}
               <button
                 onClick={onClose}
-                className="px-6 py-2.5 bg-agx-accent text-white rounded-lg font-medium hover:bg-agx-accent/90 transition-colors"
+                className="px-6 py-2.5 bg-agx-accent text-black rounded-lg font-medium hover:bg-agx-accent/90 transition-colors"
               >
                 Done
               </button>
@@ -177,7 +177,7 @@ export function CreateTask({ agentId, agentName, onClose }: CreateTaskProps) {
                       onClick={() => { setReward(String(p)); setApproved(false); }}
                       className={`flex-1 py-1.5 rounded-lg text-sm border transition-all ${
                         reward === String(p)
-                          ? "bg-agx-accent text-white border-agx-accent"
+                          ? "bg-agx-accent text-black border-agx-accent"
                           : "bg-agx-bg border-agx-border text-agx-muted hover:text-agx-text"
                       }`}
                     >
@@ -253,7 +253,7 @@ export function CreateTask({ agentId, agentName, onClose }: CreateTaskProps) {
                 <button
                   onClick={handleCreate}
                   disabled={loading || !approved || !description.trim()}
-                  className="py-2.5 bg-agx-accent text-white rounded-lg text-sm font-medium hover:bg-agx-accent/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-1"
+                  className="py-2.5 bg-agx-accent text-black rounded-lg text-sm font-medium hover:bg-agx-accent/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-1"
                 >
                   {loading && loadingLabel.includes("Creating") ? (
                     <><Spinner /> Creating...</>

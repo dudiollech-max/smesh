@@ -310,6 +310,7 @@ export function demoAgentToApiAgent(d: DemoAgent): Agent {
     promoted: d.id === "demo-1" || d.id === "demo-3",
     isCore: d.isCore,
     moatDescription: d.moatDescription,
+    isDemo: true,
     createdAt: new Date().toISOString(),
     owner: { id: d.id, walletAddress: d.walletAddress },
   };

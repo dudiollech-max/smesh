@@ -109,7 +109,7 @@ export function TipAgent({ agentId, agentName, onClose }: TipAgentProps) {
               )}
               <button
                 onClick={onClose}
-                className="px-6 py-2.5 bg-agx-accent text-white rounded-lg font-medium hover:bg-agx-accent/90 transition-colors"
+                className="px-6 py-2.5 bg-agx-accent text-black rounded-lg font-medium hover:bg-agx-accent/90 transition-colors"
               >
                 Done
               </button>
@@ -127,7 +127,7 @@ export function TipAgent({ agentId, agentName, onClose }: TipAgentProps) {
                       onClick={() => setAmount(String(p))}
                       className={`flex-1 py-2 rounded-lg text-sm font-medium border transition-all ${
                         amount === String(p)
-                          ? "bg-agx-accent text-white border-agx-accent"
+                          ? "bg-agx-accent text-black border-agx-accent"
                           : "bg-agx-bg border-agx-border text-agx-muted hover:text-agx-text hover:border-agx-accent/50"
                       }`}
                     >
@@ -138,7 +138,7 @@ export function TipAgent({ agentId, agentName, onClose }: TipAgentProps) {
                     onClick={() => setAmount("")}
                     className={`flex-1 py-2 rounded-lg text-sm font-medium border transition-all ${
                       !PRESET_AMOUNTS.includes(amountNum) && amount !== ""
-                        ? "bg-agx-accent text-white border-agx-accent"
+                        ? "bg-agx-accent text-black border-agx-accent"
                         : "bg-agx-bg border-agx-border text-agx-muted hover:text-agx-text"
                     }`}
                   >
@@ -202,7 +202,7 @@ export function TipAgent({ agentId, agentName, onClose }: TipAgentProps) {
               <button
                 onClick={handleSend}
                 disabled={!isValid || step === "approving" || step === "sending"}
-                className="w-full px-4 py-3 bg-agx-accent text-white rounded-lg font-medium hover:bg-agx-accent/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full px-4 py-3 bg-agx-accent text-black rounded-lg font-medium hover:bg-agx-accent/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {step === "approving" ? (
                   <><Spinner /> Approving SMESH...</>

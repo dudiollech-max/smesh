@@ -53,7 +53,7 @@ export function VerificationStatus({ step, error }: VerificationStatusProps) {
                     isDone
                       ? "bg-agx-green text-white"
                       : isCurrent
-                      ? "bg-agx-accent text-white animate-pulse"
+                      ? "bg-agx-accent text-black animate-pulse"
                       : "bg-agx-border text-agx-muted"
                   }`}
                 >

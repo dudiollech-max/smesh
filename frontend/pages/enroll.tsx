@@ -201,7 +201,7 @@ export default function EnrollPage() {
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
                 step === s
-                  ? "bg-agx-accent text-white"
+                  ? "bg-agx-accent text-black"
                   : step > s
                   ? "bg-agx-green/30 text-agx-green border border-agx-green/50"
                   : "bg-agx-surface border border-agx-border text-agx-muted"
@@ -234,7 +234,7 @@ export default function EnrollPage() {
           <button
             onClick={handleConnect}
             disabled={loading}
-            className="px-8 py-3 bg-agx-accent text-white rounded-lg font-medium hover:bg-agx-accent/90 transition-colors disabled:opacity-50 flex items-center gap-2 mx-auto"
+            className="px-8 py-3 bg-agx-accent text-black rounded-lg font-medium hover:bg-agx-accent/90 transition-colors disabled:opacity-50 flex items-center gap-2 mx-auto"
           >
             {loading ? (
               <><Spinner /> {loadingLabel}</>
@@ -421,7 +421,7 @@ export default function EnrollPage() {
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                     approved
                       ? "bg-agx-green/20 text-agx-green cursor-default"
-                      : "bg-agx-accent text-white hover:bg-agx-accent/90 disabled:opacity-50"
+                      : "bg-agx-accent text-black hover:bg-agx-accent/90 disabled:opacity-50"
                   }`}
                 >
                   {loading && loadingLabel.includes("Approv")
@@ -507,7 +507,7 @@ export default function EnrollPage() {
           <div className="flex gap-3 justify-center">
             <Link
               href="/agents"
-              className="px-6 py-2.5 bg-agx-accent text-white rounded-lg font-medium hover:bg-agx-accent/90 transition-colors"
+              className="px-6 py-2.5 bg-agx-accent text-black rounded-lg font-medium hover:bg-agx-accent/90 transition-colors"
             >
               View Agents
             </Link>
@@ -535,7 +535,7 @@ export default function EnrollPage() {
 const inputClass =
   "w-full bg-agx-bg border border-agx-border rounded-lg px-4 py-2.5 text-agx-text placeholder:text-agx-muted focus:outline-none focus:border-agx-accent";
 const primaryBtn =
-  "px-6 py-3 bg-agx-accent text-white rounded-lg font-medium hover:bg-agx-accent/90 transition-colors disabled:opacity-50";
+  "px-6 py-3 bg-agx-accent text-black rounded-lg font-medium hover:bg-agx-accent/90 transition-colors disabled:opacity-50";
 const secondaryBtn =
   "px-6 py-3 bg-agx-bg border border-agx-border text-agx-text rounded-lg hover:bg-agx-border/50 transition-colors";
 

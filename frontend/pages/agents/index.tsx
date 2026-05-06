@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { api, type Agent } from "@/lib/api";
 import { AgentCard } from "@/components/AgentCard";
 import { demoAgents, demoAgentToApiAgent } from "@/lib/demoAgents";
@@ -79,11 +80,31 @@ export default function AgentsPage() {
 
   return (
     <main className="max-w-7xl mx-auto px-4 py-8">
-      <div className="mb-8">
+      <div className="mb-6">
         <h1 className="text-3xl font-bold text-agx-text">Agent Marketplace</h1>
         <p className="text-agx-muted mt-1">
-          {displayedAgents.length} verified AI agents — ready to hire
+          {displayedAgents.length} agents listed — enroll yours to join
         </p>
+      </div>
+
+      {/* Demo banner */}
+      <div className="mb-6 flex items-start gap-3 p-4 bg-agx-surface border border-agx-border rounded-xl">
+        <span className="text-xl flex-shrink-0">🤖</span>
+        <div className="flex-1 min-w-0">
+          <p className="text-sm text-agx-text font-medium">
+            These are simulated demo agents — showing what&apos;s possible on SMESH.
+          </p>
+          <p className="text-xs text-agx-muted mt-0.5">
+            Real agents will appear here as builders enroll them. Be one of the first —
+            every enrolled agent earns 1,000 SMESH instantly.
+          </p>
+        </div>
+        <Link
+          href="/enroll"
+          className="flex-shrink-0 px-4 py-2 bg-agx-accent text-black text-xs font-semibold rounded-lg hover:bg-agx-accent/90 transition-colors whitespace-nowrap"
+        >
+          Enroll Your Agent →
+        </Link>
       </div>
 
       {/* Search */}
@@ -98,7 +119,7 @@ export default function AgentsPage() {
           />
           <button
             type="submit"
-            className="px-6 py-2.5 bg-agx-accent text-white rounded-lg font-medium hover:bg-agx-accent/90 transition-colors"
+            className="px-6 py-2.5 bg-agx-accent text-black rounded-lg font-medium hover:bg-agx-accent/90 transition-colors"
           >
             Search
           </button>
@@ -111,7 +132,7 @@ export default function AgentsPage() {
           onClick={() => setSelectedCapability("")}
           className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${
             !selectedCapability
-              ? "bg-agx-accent text-white"
+              ? "bg-agx-accent text-black"
               : "bg-agx-surface border border-agx-border text-agx-muted hover:text-agx-text"
           }`}
         >
@@ -123,7 +144,7 @@ export default function AgentsPage() {
             onClick={() => setSelectedCapability(cap)}
             className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${
               selectedCapability === cap
-                ? "bg-agx-accent text-white"
+                ? "bg-agx-accent text-black"
                 : "bg-agx-surface border border-agx-border text-agx-muted hover:text-agx-text"
             }`}
           >

@@ -115,7 +115,7 @@ export default function AgentProfilePage() {
             </button>
             <button
               onClick={() => setShowTask(true)}
-              className="px-5 py-2 bg-agx-accent text-white rounded-lg font-medium hover:bg-agx-accent/90 transition-colors text-sm"
+              className="px-5 py-2 bg-agx-accent text-black rounded-lg font-medium hover:bg-agx-accent/90 transition-colors text-sm"
             >
               Create Task
             </button>

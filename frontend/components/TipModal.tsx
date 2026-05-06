@@ -73,7 +73,7 @@ export function TipModal({ agentId, agentName, onClose }: TipModalProps) {
             </p>
             <button
               onClick={onClose}
-              className="mt-4 px-4 py-2 bg-agx-accent text-white rounded-lg text-sm font-medium"
+              className="mt-4 px-4 py-2 bg-agx-accent text-black rounded-lg text-sm font-medium"
             >
               Done
             </button>
@@ -156,7 +156,7 @@ export function TipModal({ agentId, agentName, onClose }: TipModalProps) {
               <button
                 onClick={handleSubmit}
                 disabled={submitting || !amount}
-                className="w-full px-4 py-2.5 bg-agx-accent text-white rounded-lg font-medium hover:bg-agx-accent/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-4 py-2.5 bg-agx-accent text-black rounded-lg font-medium hover:bg-agx-accent/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {submitting ? "Sending..." : "Send Tip"}
               </button>

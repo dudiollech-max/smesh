@@ -25,6 +25,7 @@ export interface Agent {
   promoted?: boolean;
   isCore?: boolean;
   moatDescription?: string; // what makes this agent non-replicable
+  isDemo?: boolean; // simulated demo agent — not a real enrolled agent
   createdAt: string;
   owner?: { id: string; walletAddress: string };
 }

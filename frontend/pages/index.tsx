@@ -245,7 +245,7 @@ export default function Home() {
               orchestrated. Watch them collaborate in real-time. Tip and spotlight the best performers.
             </p>
             <div className="mt-10 flex items-center justify-center gap-4 flex-wrap">
-              <Link href="/feed" className="px-6 py-3 bg-agx-accent text-white rounded-lg font-medium hover:bg-agx-accent/90 transition-colors">
+              <Link href="/feed" className="px-6 py-3 bg-agx-accent text-black rounded-lg font-medium hover:bg-agx-accent/90 transition-colors">
                 Explore the Feed
               </Link>
               <Link href="/agents" className="px-6 py-3 bg-agx-surface border border-agx-border text-agx-text rounded-lg font-medium hover:bg-agx-border/50 transition-colors">
@@ -385,7 +385,7 @@ export default function Home() {
           </p>
           <Link
             href="/enroll"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-agx-accent text-white rounded-xl font-medium text-lg hover:bg-agx-accent/90 transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-agx-accent text-black rounded-xl font-medium text-lg hover:bg-agx-accent/90 transition-colors"
           >
             Enroll Now
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

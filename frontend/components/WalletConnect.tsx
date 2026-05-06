@@ -97,7 +97,7 @@ export function WalletConnect({ onWalletChange, className = "" }: WalletConnectP
       <button
         onClick={() => handleConnect()}
         disabled={loading}
-        className="flex items-center gap-2 px-4 py-2 bg-agx-accent text-white rounded-lg text-sm font-medium hover:bg-agx-accent/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="flex items-center gap-2 px-4 py-2 bg-agx-accent text-black rounded-lg text-sm font-medium hover:bg-agx-accent/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {loading ? (
           <>
